@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Yournotalone V9</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<title>Yournotalone V9</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <style>
 
@@ -21,6 +21,7 @@ body {
   color: #463366;
 }
 
+/* Floating gradient blobs */
 .blob {
   position: fixed;
   width: 420px;
@@ -35,24 +36,32 @@ body {
 .blob1 { top: -100px; left: -100px; background: #ffc9e7; }
 .blob2 { bottom: -140px; right: -140px; background: #d7b7ff; }
 
-
 .page {
   max-width: 1100px;
   margin: 0 auto;
   padding: 32px 18px 60px;
 }
 
+/* ===================== */
+/* IMPROVED NAVBAR */
+/* ===================== */
 
 .navbar {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(14px);
-  padding: 14px 20px;
-  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(16px);
+  padding: 16px 28px;
+  border-radius: 60px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 45px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  justify-content: space-between;
+  margin-bottom: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
 .logo {
@@ -71,21 +80,55 @@ body {
   border-radius: 50%;
 }
 
-.navbar nav a {
-  margin-left: 22px;
-  color: #5a478d;
-  text-decoration: none;
-  font-size: 15px;
-  transition: .2s ease;
-  padding: 6px 12px;
-  border-radius: 8px;
+.nav-links {
+  display: flex;
+  gap: 18px;
+  align-items: center;
 }
 
-.navbar nav a:hover,
-.navbar nav .active-link {
-  background: #f6e6ff;
+.nav-links a {
+  text-decoration: none;
+  color: #5a478d;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: all .2s ease;
+}
+
+.nav-links a:hover {
+  background: #f4e8ff;
   color: #7b3ce0;
 }
+
+.nav-links .highlight {
+  background: #ffe3f4;
+  color: #c43c9b;
+  font-weight: 600;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.profile-btn {
+  background: #ff7abf;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: .2s ease;
+}
+
+.profile-btn:hover {
+  background: #ff62b4;
+}
+
+/* ===================== */
+/* HERO SECTION */
+/* ===================== */
 
 .hero-card {
   background: rgba(255, 255, 255, 0.55);
@@ -160,6 +203,9 @@ body {
   color: #7e6aa8;
 }
 
+/* ===================== */
+/* FEATURES */
+/* ===================== */
 
 .features-title {
   margin-top: 70px;
@@ -177,7 +223,6 @@ body {
   color: #6a5d85;
   font-size: 16px;
 }
-
 
 .features-grid {
   margin-top: 25px;
@@ -218,7 +263,6 @@ body {
   line-height: 1.55;
 }
 
-
 footer {
   text-align: center;
   margin-top: 90px;
@@ -232,89 +276,96 @@ footer {
 
 <body>
 
-  <div class="blob blob1"></div>
-  <div class="blob blob2"></div>
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
 
-  <div class="page">
+<div class="page">
 
-    <header class="navbar">
-      <div class="logo">
-        <div class="logo-dot"></div>
-        <span>Yournotalone</span>
-      </div>
+<header class="navbar">
 
-      <nav>
-        <a class="active-link" href="index.html">Home</a>
-        <a href="ai.html">AI Assistant</a>
-        <a href="human.html">Counsellor</a>
-        <a href="tools.html">Tools</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="crisis.html">Crisis</a>
-        <a href="profile.html">Profile</a>
-      </nav>
-    </header>
+  <div class="nav-left">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span>Yournotalone</span>
+    </div>
 
-    
-    <section class="hero-card">
-      <div class="hero-label">A gentle space online</div>
+    <div class="nav-links">
+      <a href="index.html" class="highlight">Home</a>
+      <a href="ai.html">AI Assistant</a>
+      <a href="human.html">Counsellor</a>
+      <a href="tools.html">Tools</a>
+      <a href="wall.html" >Anonymous Wall</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="crisis.html">Crisis</a>
+    </div>
+  </div>
 
-      <h1 class="hero-title">
-        Mindfulness & counselling<br>
-        for those who quietly need a safe place to breathe
-      </h1>
+  <div class="nav-right">
+    <a href="profile.html" class="profile-btn">Profile</a>
+  </div>
 
-      <p class="hero-desc">
-        Talk to an AI companion anytime, or connect to a real counsellor when you're ready —
-        all in one safe, judgment-free space.
-      </p>
+</header>
 
-      <div class="hero-buttons">
-        <a class="btn primary" href="ai.html">Try AI Mood Assistant</a>
-        <a class="btn outline" href="human.html">Book a Counsellor</a>
-      </div>
+<section class="hero-card">
+  <div class="hero-label">A gentle space online</div>
 
-      <p class="hero-small">24/7 support · Designed for the youths</p>
-    </section>
+  <h1 class="hero-title">
+    Mindfulness & counselling<br>
+    for those who quietly need a safe place to breathe
+  </h1>
 
-    <section class="features-title">
-      <h2>If a website could save the world…</h2>
-      <p>It would save minds first. These features quietly prevent crises.</p>
-    </section>
+  <p class="hero-desc">
+    Talk to an AI companion anytime, or connect to a real counsellor when you're ready —
+    all in one safe, judgment-free space.
+  </p>
 
-    <section class="features-grid">
-      <div class="feature-card">
-        <div class="icon">🤖</div>
-        <h3>AI Mood Assistant</h3>
-        <p> A gentle 24/7 listener that helps you name emotions and feel less alone at 2am.</p>
-      </div>
+  <div class="hero-buttons">
+    <a class="btn primary" href="ai.html">Try AI Mood Assistant</a>
+    <a class="btn outline" href="human.html">Book a Counsellor</a>
+  </div>
 
-      <div class="feature-card">
-        <div class="icon">👥</div>
-        <h3>Human Counsellor Booking</h3>
-        <p>Private online sessions with real counsellors when you’re ready to talk.</p>
-      </div>
+  <p class="hero-small">24/7 support · Designed for the youths</p>
+</section>
 
-      <div class="feature-card">
-        <div class="icon">🚨</div>
-        <h3>Crisis Support</h3>
-        <p>Emergency hotlines and clear crisis guidance for moments of severe distress.</p>
-      </div>
+<section class="features-title">
+  <h2>If a website could save the world…</h2>
+  <p>It would save minds first. These features quietly prevent crises.</p>
+</section>
 
-      <div class="feature-card">
-        <div class="icon">🧘</div>
-        <h3>Daily Mental Health Tools</h3>
-        <p>Breathing, grounding, journaling — small rituals to reset your day.</p>
-      </div>
-       <div class="feature-card">
+<section class="features-grid">
+  <div class="feature-card">
+    <div class="icon">🤖</div>
+    <h3>AI Mood Assistant</h3>
+    <p>A gentle 24/7 listener that helps you name emotions and feel less alone at 2am.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="icon">👥</div>
+    <h3>Human Counsellor Booking</h3>
+    <p>Private online sessions with real counsellors when you’re ready to talk.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="icon">🚨</div>
+    <h3>Crisis Support</h3>
+    <p>Emergency hotlines and clear crisis guidance for moments of severe distress.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="icon">🧘</div>
+    <h3>Daily Mental Health Tools</h3>
+    <p>Breathing, grounding, journaling — small rituals to reset your day.</p>
+  </div>
+
+  <div class="feature-card">
     <div class="icon">📊</div>
     <h3>Personalised Dashboard</h3>
     <p>A private snapshot of your moods, tools used, and your next counselling session.</p>
   </div>
-    </section>
+</section>
 
-    <footer>Progress is still progress, even if only you can see it. 💫</footer>
+<footer>Progress is still progress, even if only you can see it. 💫</footer>
 
-  </div>
-
+</div>
 </body>
 </html>

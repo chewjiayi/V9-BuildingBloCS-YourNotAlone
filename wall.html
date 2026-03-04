@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yournotalone - Anonymous Wall</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Poppins",sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ffe5f4,#e5d4ff,#f3e1ff);
+min-height:100vh;
+color:#463366;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+/* NAVBAR */
+
+.navbar{
+margin-top:30px;
+width:85%;
+background:rgba(255,255,255,0.6);
+backdrop-filter:blur(16px);
+padding:16px 28px;
+border-radius:60px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.nav-left{
+display:flex;
+gap:40px;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+font-weight:600;
+color:#55348a;
+}
+
+.logo-dot{
+width:12px;
+height:12px;
+background:#ff7fbf;
+border-radius:50%;
+}
+
+.nav-links{
+display:flex;
+gap:16px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:#5a478d;
+padding:8px 14px;
+border-radius:20px;
+font-size:14px;
+}
+
+.nav-links a:hover{
+background:#f4e8ff;
+}
+
+.highlight{
+background:#ffe3f4;
+color:#c43c9b;
+}
+
+.profile-btn{
+background:#ff7abf;
+color:white;
+padding:8px 18px;
+border-radius:25px;
+text-decoration:none;
+font-size:14px;
+}
+
+/* CARD */
+
+.card{
+margin-top:50px;
+width:85%;
+max-width:900px;
+background:rgba(255,255,255,0.65);
+padding:40px;
+border-radius:30px;
+backdrop-filter:blur(15px);
+box-shadow:0 20px 40px rgba(120,73,230,0.08);
+}
+
+h1{
+font-size:32px;
+margin-bottom:10px;
+}
+
+.subtitle{
+color:#6c5c92;
+margin-bottom:25px;
+}
+
+textarea{
+width:100%;
+padding:15px;
+border-radius:20px;
+border:none;
+background:white;
+resize:none;
+outline:none;
+}
+
+.buttons{
+margin-top:15px;
+}
+
+button{
+padding:10px 20px;
+border-radius:25px;
+border:none;
+cursor:pointer;
+font-weight:600;
+margin-right:10px;
+}
+
+.post-btn{
+background:#ff7abf;
+color:white;
+}
+
+.clear-btn{
+background:#b29ddb;
+color:white;
+}
+
+.posts{
+margin-top:30px;
+}
+
+/* POST */
+
+.post{
+background:white;
+padding:15px;
+border-radius:20px;
+margin-bottom:18px;
+box-shadow:0 8px 20px rgba(130,90,230,0.08);
+animation:fadeIn .4s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+.time{
+font-size:12px;
+color:gray;
+margin-top:4px;
+}
+
+/* REACTIONS */
+
+.reactions{
+margin-top:10px;
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+}
+
+.reaction{
+background:#f3e8ff;
+padding:5px 10px;
+border-radius:14px;
+font-size:13px;
+cursor:pointer;
+}
+
+.reaction:hover{
+background:#e4d6ff;
+}
+
+/* COMMENTS */
+
+.comments{
+margin-top:10px;
+padding-left:10px;
+}
+
+.comment{
+font-size:13px;
+margin-top:5px;
+color:#555;
+}
+
+.comment-input{
+margin-top:8px;
+display:flex;
+gap:8px;
+}
+
+.comment-input input{
+flex:1;
+padding:6px 10px;
+border-radius:12px;
+border:1px solid #ddd;
+font-size:13px;
+}
+
+.comment-input button{
+padding:6px 10px;
+font-size:12px;
+border-radius:10px;
+background:#ff7abf;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="nav-left">
+
+<div class="logo">
+<div class="logo-dot"></div>
+<span>Yournotalone</span>
+</div>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="ai.html">AI Assistant</a>
+<a href="human.html">Counsellor</a>
+<a href="tools.html">Tools</a>
+<a href="wall.html" class="highlight">Anonymous Wall</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="crisis.html">Crisis</a>
+</div>
+
+</div>
+
+<a href="profile.html" class="profile-btn">Profile</a>
+
+</header>
+
+<div class="card">
+
+<h1>Anonymous Sharing Space</h1>
+<p class="subtitle">A gentle, judgment-free wall where everyone can breathe.</p>
+
+<textarea id="messageInput" rows="4" placeholder="How are you feeling today?"></textarea>
+
+<div class="buttons">
+<button class="post-btn" onclick="addPost()">Post Anonymously</button>
+<button class="clear-btn" onclick="clearInput()">Clear</button>
+</div>
+
+<div class="posts" id="postContainer"></div>
+
+</div>
+
+<script>
+
+/* NORMALIZE TEXT */
+
+function normalizeText(text){
+
+return text
+.toLowerCase()
+.replace(/1/g,"i")
+.replace(/!/g,"i")
+.replace(/0/g,"o")
+.replace(/3/g,"e")
+.replace(/4/g,"a")
+.replace(/@/g,"a")
+.replace(/\$/g,"s")
+.replace(/\*/g,"")
+.replace(/\./g,"")
+.replace(/\bur\b/g,"your")
+.replace(/\bu\b/g,"you");
+
+}
+
+/* BAD WORD FILTER */
+
+const bannedWords=[
+"fuck","shit","bitch","asshole","idiot","stupid","loser","worthless", "kill","die","lol","lmao","rofl","wth","wtf","damn","crap","dumb","suck","piss","bastard",
+];
+
+/* CRISIS WORDS */
+
+const crisisWords=[
+"suicide","kill myself","kill yourself","kill your self","want to die","wanna die","die"
+];
+
+/* RISKY PHRASES FOR REFLECTION */
+
+const riskyPhrases=[
+"kill you","kill yourself","go die","hate you","shut up","stupid","idiot"
+];
+
+function containsBannedWords(text){
+
+const normalized=normalizeText(text);
+
+return bannedWords.some(word=>normalized.includes(word));
+
+}
+
+function containsRiskyTone(text){
+
+const normalized=normalizeText(text);
+
+return riskyPhrases.some(word=>normalized.includes(word));
+
+}
+
+/* REDDIT STYLE REFLECTION PROMPT */
+
+function confirmSupportive(text){
+
+if(containsRiskyTone(text)){
+
+return confirm(
+"This message may sound harmful.\n\n"+
+"This space is meant to support people who may be struggling.\n\n"+
+"Do you want to edit your message?"
+);
+
+}
+
+return true;
+
+}
+
+/* LOAD POSTS */
+
+let posts=JSON.parse(localStorage.getItem("anonWall"));
+
+if(!posts){
+
+posts=[
+
+{
+id:1,
+message:"Some days feel really heavy but I'm trying.",
+time:"Today",
+reactions:{hear:3,strong:1,alone:2,support:1},
+comments:[{text:"Stay strong 💛"}]
+},
+
+{
+id:2,
+message:"I feel like nobody understands me sometimes.",
+time:"Today",
+reactions:{hear:4,strong:2,alone:3,support:1},
+comments:[]
+}
+
+];
+
+}
+
+/* SAVE */
+
+function savePosts(){
+localStorage.setItem("anonWall",JSON.stringify(posts));
+}
+
+/* ADD POST */
+
+function addPost(){
+
+const text=document.getElementById("messageInput").value.trim();
+
+if(text===""){
+alert("Write something first 💛");
+return;
+}
+
+if(text.length>300){
+alert("Please keep message under 300 characters 💛");
+return;
+}
+
+if(containsBannedWords(text)){
+alert("Please keep this space respectful and supportive 💛");
+return;
+}
+
+if(!confirmSupportive(text)){
+return;
+}
+
+if(crisisWords.some(w=>normalizeText(text).includes(w))){
+alert("💛 You are not alone.\n\nIf you need help:\n📞 Samaritans of Singapore\n1767");
+}
+
+const post={
+id:Date.now(),
+message:text,
+time:new Date().toLocaleString(),
+reactions:{hear:0,strong:0,alone:0,support:0},
+comments:[]
+};
+
+posts.unshift(post);
+
+savePosts();
+displayPosts();
+
+document.getElementById("messageInput").value="";
+
+}
+
+/* REACTION */
+
+function reactPost(id,type){
+
+posts=posts.map(p=>{
+if(p.id===id){
+p.reactions[type]++;
+}
+return p;
+});
+
+savePosts();
+displayPosts();
+
+}
+
+/* ADD COMMENT */
+
+function addComment(postId){
+
+const input=document.getElementById("comment-"+postId);
+const text=input.value.trim();
+
+if(text==="") return;
+
+if(containsBannedWords(text)){
+alert("Please keep comments supportive 💛");
+return;
+}
+
+posts=posts.map(p=>{
+if(p.id===postId){
+p.comments.push({text:text});
+}
+return p;
+});
+
+savePosts();
+displayPosts();
+
+}
+
+/* DISPLAY POSTS */
+
+function displayPosts(){
+
+const container=document.getElementById("postContainer");
+
+container.innerHTML="";
+
+posts.forEach(post=>{
+
+let commentsHTML="";
+
+post.comments.forEach(c=>{
+commentsHTML+=`<div class="comment">💬 ${c.text}</div>`;
+});
+
+container.innerHTML+=`
+
+<div class="post">
+
+<strong>Anonymous</strong>
+
+<div>${post.message}</div>
+
+<div class="time">${post.time}</div>
+
+<div class="reactions">
+
+<div class="reaction" onclick="reactPost(${post.id},'hear')">
+❤️ I hear you (${post.reactions.hear})
+</div>
+
+<div class="reaction" onclick="reactPost(${post.id},'strong')">
+🤝 Stay strong (${post.reactions.strong})
+</div>
+
+<div class="reaction" onclick="reactPost(${post.id},'alone')">
+🌱 You're not alone (${post.reactions.alone})
+</div>
+
+<div class="reaction" onclick="reactPost(${post.id},'support')">
+☀️ Sending support (${post.reactions.support})
+</div>
+
+</div>
+
+<div class="comments">
+
+${commentsHTML}
+
+<div class="comment-input">
+
+<input id="comment-${post.id}" placeholder="Write a supportive comment...">
+
+<button onclick="addComment(${post.id})">Send</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+displayPosts();
+
+</script>
+
+</body>
+</html>
